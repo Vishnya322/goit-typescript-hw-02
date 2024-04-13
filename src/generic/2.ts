@@ -3,16 +3,20 @@
   Ваше завдання – використовувати Pick та generics для вказівки, що поля цих об'єктів належать AllType.
   Функція compare повинна повертати AllType.
 */
-type Type = {
+type AllType = {
   name: string;
   position: number;
   color: string;
   weight: number;
 };
 
-type AllType = Pick<Type, "name" | "position" | "color" | "weight">;
+type TopType = Pick<AllType, "name" | "color">;
+type BottomType = Pick<AllType, "position" | "weight">;
 
-function compare<T extends AllType>(top: T, bottom: T): AllType {
+function compare<T extends TopType, U extends BottomType>(
+  top: T,
+  bottom: U
+): AllType {
   return {
     name: top.name,
     color: top.color,
